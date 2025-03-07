@@ -24,6 +24,9 @@ namespace CalculatorPers
             InitializeComponent();
         }
 
+        private void SwitchModeButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as Button).Content.ToString() == "C")
