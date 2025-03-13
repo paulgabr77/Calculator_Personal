@@ -5,29 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorPers"
         mc:Ignorable="d"
-        Title="Calculator Personal" Height="450" Width="330">
+        Title="Calculator Personal" Height="450" Width="300" 
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown">
+    
+    <Window.Resources>
+        <!-- Stiluri pentru butoane -->
+        <Style x:Key="CalculatorButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="#EFEFEF"/>
+        </Style>
+        
+        <Style x:Key="OperatorButtonStyle" TargetType="Button" BasedOn="{StaticResource CalculatorButtonStyle}">
+            <Setter Property="Background" Value="#E6E6E6"/>
+        </Style>
+        
+        <Style x:Key="EqualButtonStyle" TargetType="Button" BasedOn="{StaticResource CalculatorButtonStyle}">
+            <Setter Property="Background" Value="#4B89DC"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="SwitchModeButton" Content="≡" FontSize="20" Width="40" Height="40"
-                HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Margin="10" Click="SwitchModeButton_Click"/>
-
-            <TextBox x:Name="Display" Grid.Column="1" FontSize="40" VerticalAlignment="Center" 
-                 TextAlignment="Right" IsReadOnly="True" Margin="10,0,10,0" 
-                 Padding="10" Height="40"/>
-        </Grid>
+        
+        <!-- Meniu principal -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Cut" Click="Cut_Click" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Copy" Click="Copy_Click" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Paste" Click="Paste_Click" InputGestureText="Ctrl+V"/>
+                <Separator/>
+                <MenuItem Header="Digit Grouping" IsCheckable="True" IsChecked="{Binding DigitGroupingEnabled}" Click="DigitGrouping_Click"/>
+                <Separator/>
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Standard" IsCheckable="True" IsChecked="True" Click="Standard_Click"/>
+                <MenuItem Header="Programmer" IsCheckable="True" Click="Programmer_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        
+        <!-- Display -->
         <Grid Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Expresie -->
+            <TextBlock x:Name="ExpressionDisplay" 
+                     Grid.Row="0" 
+                     FontSize="12" 
+                     TextAlignment="Right"
+                     TextWrapping="Wrap" 
+                     Margin="0,0,0,5"
+                     Height="20"/>
+            
+            <!-- Rezultat -->
+            <TextBlock x:Name="ResultDisplay" 
+                     Grid.Row="1" 
+                     FontSize="24" 
+                     TextAlignment="Right"
+                     Text="0"
+                     Height="40"/>
+        </Grid>
+        
+        <!-- Butoane -->
+        <Grid x:Name="StandardCalculatorGrid" Grid.Row="2" Margin="10">
+            <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -41,40 +95,94 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ButtonMC" Content="MC" Grid.Row="0" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="ButtonMR" Content="MR" Grid.Row="0" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="ButtonMPlus" Content="M+" Grid.Row="0" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonMMinus" Content="M-" Grid.Row="0" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="ButtonPercent" Content="%" Grid.Row="1" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="ButtonCE" Content="CE" Grid.Row="1" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="ButtonC" Content="C" Grid.Row="1" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonBackspace" Content="_" Grid.Row="1" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="ButtonReciprocal" Content="1/x" Grid.Row="2" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="ButtonSquare" Content="x²" Grid.Row="2" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="ButtonSQRT" Content="√x" Grid.Row="2" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonDivide" Content="/" Grid.Row="2" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="Button7" Content="7" Grid.Row="3" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="Button8" Content="8" Grid.Row="3" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="Button9" Content="9" Grid.Row="3" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonMultiply" Content="*" Grid.Row="3" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="Button4" Content="4" Grid.Row="4" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="Button5" Content="5" Grid.Row="4" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="Button6" Content="6" Grid.Row="4" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonMinus" Content="-" Grid.Row="4" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="Button1" Content="1" Grid.Row="5" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="Button2" Content="2" Grid.Row="5" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="Button3" Content="3" Grid.Row="5" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonPlus" Content="+" Grid.Row="5" Grid.Column="3" Click="Button_Click"/>
-
-            <Button x:Name="ButtonSign" Content="+/-" Grid.Row="6" Grid.Column="0" Click="Button_Click"/>
-            <Button x:Name="Button0" Content="0" Grid.Row="6" Grid.Column="1" Click="Button_Click"/>
-            <Button x:Name="ButtonDot" Content="." Grid.Row="6" Grid.Column="2" Click="Button_Click"/>
-            <Button x:Name="ButtonEqual" Content="=" Grid.Row="6" Grid.Column="3" Click="Button_Click"/>
+            
+            <!-- Rândul 1 -->
+            <Button Content="MC" Grid.Row="0" Grid.Column="0" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            <Button Content="MR" Grid.Row="0" Grid.Column="1" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            <Button Content="MS" Grid.Row="0" Grid.Column="2" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            <Button Content="M+" Grid.Row="0" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            
+            <!-- Rândul 2 -->
+            <Button Content="M-" Grid.Row="1" Grid.Column="0" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            <Button Content="M>" Grid.Row="1" Grid.Column="1" Style="{StaticResource OperatorButtonStyle}" Click="Memory_Click"/>
+            <Button Content="CE" Grid.Row="1" Grid.Column="2" Style="{StaticResource OperatorButtonStyle}" Click="Clear_Click"/>
+            <Button Content="C" Grid.Row="1" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Clear_Click"/>
+            
+            <!-- Rândul 3 -->
+            <Button Content="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="/" Grid.Row="2" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
+            
+            <!-- Rândul 4 -->
+            <Button Content="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="5" Grid.Row="3" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="6" Grid.Row="3" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="*" Grid.Row="3" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
+            
+            <!-- Rândul 5 -->
+            <Button Content="1" Grid.Row="4" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="2" Grid.Row="4" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="3" Grid.Row="4" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="-" Grid.Row="4" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
+            
+            <!-- Rândul 6 -->
+            <Button Content="0" Grid.Row="5" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
+            <Button Content="." Grid.Row="5" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Decimal_Click"/>
+            <Button Content="=" Grid.Row="5" Grid.Column="2" Style="{StaticResource EqualButtonStyle}" Click="Equal_Click"/>
+            <Button Content="+" Grid.Row="5" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
+        </Grid>
+        
+        <!-- Butoane pentru operații adiționale -->
+        <Grid x:Name="AdditionalOperationsGrid" Grid.Row="2" Margin="10" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Operații adiționale -->
+            <Button Content="√" Grid.Row="0" Grid.Column="0" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
+            <Button Content="x²" Grid.Row="0" Grid.Column="1" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
+            <Button Content="1/x" Grid.Row="0" Grid.Column="2" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
+            <Button Content="%" Grid.Row="0" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
+            
+            <!-- Continua cu restul butoanelor pentru modul Programmer -->
+        </Grid>
+        
+        <!-- Grid pentru modul Programmer - hidden initial -->
+        <Grid x:Name="ProgrammerGrid" Grid.Row="2" Margin="10" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Selecție bază numerică -->
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                <RadioButton x:Name="HexRadioButton" Content="Hex" GroupName="BaseGroup" Margin="5" Checked="BaseRadioButton_Checked"/>
+                <RadioButton x:Name="DecRadioButton" Content="Dec" GroupName="BaseGroup" IsChecked="True" Margin="5" Checked="BaseRadioButton_Checked"/>
+                <RadioButton x:Name="OctRadioButton" Content="Oct" GroupName="BaseGroup" Margin="5" Checked="BaseRadioButton_Checked"/>
+                <RadioButton x:Name="BinRadioButton" Content="Bin" GroupName="BaseGroup" Margin="5" Checked="BaseRadioButton_Checked"/>
+            </StackPanel>
+            
+            <!-- Butoane Hex specifice - vor fi activate doar în modul Hex -->
+            <WrapPanel x:Name="HexButtonsPanel" Grid.Row="1" Visibility="Collapsed">
+                <Button Content="A" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+                <Button Content="B" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+                <Button Content="C" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+                <Button Content="D" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+                <Button Content="E" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+                <Button Content="F" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
+            </WrapPanel>
         </Grid>
     </Grid>
 </Window>
