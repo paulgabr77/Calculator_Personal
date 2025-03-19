@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|c:\\users\\paulg\\onedrive\\documente\\github\\calculator_personal\\calculatorpers\\calculatorpers\\calculatormodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|solutionrelative:calculatorpers\\calculatormodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|c:\\users\\paulg\\onedrive\\documente\\github\\calculator_personal\\calculatorpers\\calculatorpers\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|solutionrelative:calculatorpers\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|c:\\users\\paulg\\onedrive\\documente\\github\\calculator_personal\\calculatorpers\\calculatorpers\\calculatorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|solutionrelative:calculatorpers\\calculatorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|c:\\users\\paulg\\onedrive\\documente\\github\\calculator_personal\\calculatorpers\\calculatorpers\\calculatormodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D79AE1B6-D7A9-4118-8CA2-E0098C577820}|CalculatorPers\\CalculatorPers.csproj|solutionrelative:calculatorpers\\calculatormodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -44,7 +44,7 @@
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -52,48 +52,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CalculatorSettings.cs",
               "DocumentMoniker": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\CalculatorSettings.cs",
               "RelativeDocumentMoniker": "CalculatorPers\\CalculatorSettings.cs",
               "ToolTip": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\CalculatorSettings.cs",
               "RelativeToolTip": "CalculatorPers\\CalculatorSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T20:29:25.542Z"
+              "WhenOpened": "2025-03-08T20:29:25.542Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "CalculatorModel.cs",
               "DocumentMoniker": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\CalculatorModel.cs",
               "RelativeDocumentMoniker": "CalculatorPers\\CalculatorModel.cs",
-              "ToolTip": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\CalculatorModel.cs",
-              "RelativeToolTip": "CalculatorPers\\CalculatorModel.cs",
-              "ViewState": "AgIAADYBAAAAAAAAAAAIwAUAAAAYAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\CalculatorModel.cs*",
+              "RelativeToolTip": "CalculatorPers\\CalculatorModel.cs*",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAnwKIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T20:27:38.397Z"
+              "WhenOpened": "2025-03-08T20:27:38.397Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\MainWindow.xaml",
               "RelativeDocumentMoniker": "CalculatorPers\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\MainWindow.xaml",
               "RelativeToolTip": "CalculatorPers\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-07T13:26:18.649Z"
+              "WhenOpened": "2025-03-07T13:26:18.649Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "CalculatorPers\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\paulg\\OneDrive\\Documente\\GitHub\\Calculator_Personal\\CalculatorPers\\CalculatorPers\\MainWindow.xaml.cs",
               "RelativeToolTip": "CalculatorPers\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAADwv5AAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwBEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-07T13:26:13.616Z",
               "EditorCaption": ""

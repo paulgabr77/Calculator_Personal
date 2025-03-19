@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime;
 using System.Text;
 
 namespace CalculatorPers
@@ -15,7 +16,12 @@ namespace CalculatorPers
         private bool _hasCalculated = false;
         private List<double> _memoryValues = new List<double>();
         private StringBuilder _expressionBuilder = new StringBuilder();
+        private CalculatorSettings _settings;
 
+        public CalculatorModel()
+        {
+            _settings = new CalculatorSettings();
+        }
         public void AppendDigit(string digit)
         {
             // Verificăm dacă trebuie să începem o nouă intrare
@@ -51,9 +57,7 @@ namespace CalculatorPers
             // Ștergem ultimul caracter
             if (!_isNewInput && !_hasCalculated && _currentInput.Length > 0)
             {
-                _currentInput = _currentInput.Length > 1
-                    ? _currentInput.Substring(0, _currentInput.Length - 1)
-                    : "0";
+                _currentInput = _currentInput.Length > 1 ? _currentInput.Substring(0, _currentInput.Length - 1): "0";
 
                 if (_currentInput == "0")
                 {
@@ -144,9 +148,20 @@ namespace CalculatorPers
 
         private void CalculateIntermediateResult()
         {
-            double inputValue = double.Parse(_currentInput);
+            double inputValue;
 
-            // Aplicăm operatorul anterior
+            if (_settings.Base == NumberBase.Hex)
+            {
+                inputValue = Convert.ToInt64(_currentInput, 16);
+            }
+            else
+            {
+                if (!double.TryParse(_currentInput, out inputValue))
+                {
+                    // Handle the case where the input is not a valid number
+                    inputValue = 0; // or some other default value or error handling
+                }
+            }
             switch (_lastOperator)
             {
                 case "+":
@@ -165,7 +180,6 @@ namespace CalculatorPers
                     }
                     else
                     {
-                        // Eroare - împărțire la zero
                         _currentValue = 0;
                     }
                     break;
@@ -179,17 +193,12 @@ namespace CalculatorPers
 
         public void CalculateResult()
         {
-            // Calculăm rezultatul final
             if (!string.IsNullOrEmpty(_lastOperator) && !_isNewInput)
             {
                 CalculateIntermediateResult();
-
-                // Resetăm pentru următoarea operație
                 _lastOperator = "";
                 _isNewInput = true;
                 _hasCalculated = true;
-
-                // Adăugăm la expresie
                 _expressionBuilder.Append($" {_currentInput} =");
             }
         }
@@ -237,13 +246,10 @@ namespace CalculatorPers
 
         public string GetDisplayValue(bool useDigitGrouping, NumberBase numberBase = NumberBase.Dec)
         {
-            // Obținem valoarea pentru afișaj în funcție de setări
             if (numberBase == NumberBase.Dec)
             {
-                // În baza 10, folosim formatarea cultură
                 if (useDigitGrouping)
                 {
-                    // Determinăm cultura sistemului pentru separatorul corect
                     double value;
                     if (double.TryParse(_currentInput, out value))
                     {
@@ -255,11 +261,9 @@ namespace CalculatorPers
             }
             else
             {
-                // Pentru alte baze, convertim valoarea
                 double value;
                 if (double.TryParse(_currentInput, out value))
                 {
-                    // Rotunjim pentru a evita probleme cu numere zecimale
                     long intValue = (long)Math.Round(value);
 
                     switch (numberBase)
@@ -290,7 +294,6 @@ namespace CalculatorPers
 
         public void PasteValue(string value)
         {
-            // Verificăm dacă valoarea este un număr valid
             double parsedValue;
             if (double.TryParse(value, out parsedValue))
             {
@@ -307,7 +310,6 @@ namespace CalculatorPers
         #endregion
     }
 
-    // Enumerări pentru setări
     public enum CalculatorMode
     {
         Standard,

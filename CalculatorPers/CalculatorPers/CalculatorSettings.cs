@@ -22,14 +22,12 @@ namespace CalculatorPers
         {
             try
             {
-                // Asigurăm-ne că directorul există
                 string directoryPath = Path.GetDirectoryName(SettingsFilePath);
                 if (!Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
 
-                // Verificăm dacă fișierul există
                 if (File.Exists(SettingsFilePath))
                 {
                     using (FileStream fs = new FileStream(SettingsFilePath, FileMode.Open))
