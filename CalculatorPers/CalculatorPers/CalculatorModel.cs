@@ -24,7 +24,20 @@ namespace CalculatorPers
         }
         public void AppendDigit(string digit)
         {
-            // Verificăm dacă trebuie să începem o nouă intrare
+            if (_settings.Base == NumberBase.Hex)
+            {
+                if (!"0123456789ABCDEFabcdef".Contains(digit))
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (!"0123456789".Contains(digit))
+                {
+                    return;
+                }
+            }
             if (_isNewInput || _currentInput == "0" || _hasCalculated)
             {
                 _currentInput = digit;
@@ -39,7 +52,6 @@ namespace CalculatorPers
 
         public void AppendDecimalPoint()
         {
-            // Verificăm dacă putem adăuga punct zecimal
             if (_isNewInput || _hasCalculated)
             {
                 _currentInput = "0.";
@@ -54,7 +66,6 @@ namespace CalculatorPers
 
         public void Backspace()
         {
-            // Ștergem ultimul caracter
             if (!_isNewInput && !_hasCalculated && _currentInput.Length > 0)
             {
                 _currentInput = _currentInput.Length > 1 ? _currentInput.Substring(0, _currentInput.Length - 1): "0";
@@ -68,14 +79,12 @@ namespace CalculatorPers
 
         public void ClearEntry()
         {
-            // Resetăm intrarea curentă
             _currentInput = "0";
             _isNewInput = true;
         }
 
         public void ClearAll()
         {
-            // Resetăm totul
             _currentInput = "0";
             _currentValue = 0;
             _lastOperator = "";
@@ -86,23 +95,19 @@ namespace CalculatorPers
 
         public void ProcessOperator(string op)
         {
-            // Calculăm rezultatul curent înainte de a procesa noul operator
             if (!_isNewInput || _hasCalculated)
             {
                 CalculateIntermediateResult();
             }
 
-            // Salvăm operatorul pentru următorul calcul
             _lastOperator = op;
             _isNewInput = true;
 
-            // Adăugăm la expresie
             _expressionBuilder.Append($" {_currentValue} {op}");
         }
 
         public void ProcessSpecialOperator(string op)
         {
-            // Procesăm operatorul special (sqrt, square, etc)
             double value = double.Parse(_currentInput);
 
             switch (op)
@@ -114,7 +119,6 @@ namespace CalculatorPers
                     }
                     else
                     {
-                        // Eroare - radical din număr negativ
                         value = 0;
                     }
                     break;
@@ -128,12 +132,10 @@ namespace CalculatorPers
                     }
                     else
                     {
-                        // Eroare - împărțire la zero
                         value = 0;
                     }
                     break;
                 case "%":
-                    // Procentaj din valoarea curentă
                     value = _currentValue * (value / 100);
                     break;
                 case "+/-":
@@ -152,14 +154,20 @@ namespace CalculatorPers
 
             if (_settings.Base == NumberBase.Hex)
             {
-                inputValue = Convert.ToInt64(_currentInput, 16);
+                if (long.TryParse(_currentInput, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out long hexValue))
+                {
+                    inputValue = hexValue;
+                }
+                else
+                {
+                    inputValue = 0; 
+                }
             }
             else
             {
                 if (!double.TryParse(_currentInput, out inputValue))
                 {
-                    // Handle the case where the input is not a valid number
-                    inputValue = 0; // or some other default value or error handling
+                    inputValue = 0; 
                 }
             }
             switch (_lastOperator)
