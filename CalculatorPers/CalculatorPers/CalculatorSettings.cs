@@ -39,11 +39,8 @@ namespace CalculatorPers
             }
             catch (Exception)
             {
-                // În caz de eroare, returnăm setări implicite
-                // Putem adăuga logging aici dacă dorim
-            }
 
-            // Returnăm setări implicite dacă nu există fișierul sau a apărut o eroare
+            }
             return new CalculatorSettings();
         }
 
@@ -51,14 +48,12 @@ namespace CalculatorPers
         {
             try
             {
-                // Asigurăm-ne că directorul există
                 string directoryPath = Path.GetDirectoryName(SettingsFilePath);
                 if (!Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
 
-                // Salvăm setările în fișier
                 using (FileStream fs = new FileStream(SettingsFilePath, FileMode.Create))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(CalculatorSettings));
@@ -67,7 +62,7 @@ namespace CalculatorPers
             }
             catch (Exception)
             {
-                // Gestionăm eroarea - putem adăuga logging aici
+
             }
         }
     }

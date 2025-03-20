@@ -168,7 +168,6 @@ namespace CalculatorPers
             var memoryValues = _calculatorModel.GetMemoryValues();
             if (memoryValues.Count > 0)
             {
-                // Creăm o fereastră nouă pentru afișarea valorilor
                 Window memoryWindow = new Window
                 {
                     Title = "Memory Values",
@@ -179,19 +178,16 @@ namespace CalculatorPers
                     ResizeMode = ResizeMode.NoResize
                 };
 
-                // Creăm un ListView pentru a afișa valorile
                 ListView listView = new ListView();
                 foreach (var value in memoryValues)
                 {
                     listView.Items.Add(value.ToString(CultureInfo.CurrentCulture));
                 }
 
-                // Adăugăm un handler pentru dublu-click pe element
                 listView.MouseDoubleClick += (s, e) =>
                 {
                     if (listView.SelectedItem != null)
-                    {
-                        // Folosim valoarea selectată
+                    { 
                         _calculatorModel.PasteValue(listView.SelectedItem.ToString());
                         UpdateDisplay();
                         memoryWindow.Close();
@@ -215,7 +211,6 @@ namespace CalculatorPers
             {
                 NumberBase selectedBase = NumberBase.Dec;
 
-                // Determinăm baza selectată
                 if (radioButton == HexRadioButton)
                 {
                     selectedBase = NumberBase.Hex;
@@ -257,28 +252,24 @@ namespace CalculatorPers
                 }
                 else
                 {
-                    // Handle the null case, possibly by initializing _settings or logging an error
+                    MessageBox.Show("Settings object is null.", "Error");
                 }
             }
         }
         private void Standard_Click(object sender, RoutedEventArgs e)
         {
-            // Activăm modul Standard
             StandardCalculatorGrid.Visibility = Visibility.Visible;
             ProgrammerGrid.Visibility = Visibility.Collapsed;
 
-            // Actualizăm setările
             _settings.Mode = CalculatorMode.Standard;
             SettingsManager.SaveSettings(_settings);
         }
 
         private void Programmer_Click(object sender, RoutedEventArgs e)
         {
-            // Activăm modul Programmer
             StandardCalculatorGrid.Visibility = Visibility.Collapsed;
             ProgrammerGrid.Visibility = Visibility.Visible;
 
-            // Actualizăm setările
             _settings.Mode = CalculatorMode.Programmer;
             SettingsManager.SaveSettings(_settings);
         }
@@ -288,7 +279,6 @@ namespace CalculatorPers
             var menuItem = sender as MenuItem;
             if (menuItem != null)
             {
-                // Actualizăm setarea pentru Digit Grouping
                 _settings.DigitGroupingEnabled = menuItem.IsChecked;
                 SettingsManager.SaveSettings(_settings);
                 UpdateDisplay();
@@ -301,7 +291,6 @@ namespace CalculatorPers
         }
         private void Cut_Click(object sender, RoutedEventArgs e)
         {
-            // Implementăm funcția Cut
             Clipboard.SetText(ResultDisplay.Text);
             _calculatorModel.ClearAll();
             UpdateDisplay();
@@ -309,13 +298,11 @@ namespace CalculatorPers
 
         private void Copy_Click(object sender, RoutedEventArgs e)
         {
-            // Implementăm funcția Copy
             Clipboard.SetText(ResultDisplay.Text);
         }
 
         private void Paste_Click(object sender, RoutedEventArgs e)
         {
-            // Implementăm funcția Paste
             try
             {
                 string clipboardText = Clipboard.GetText();
@@ -336,7 +323,6 @@ namespace CalculatorPers
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            // Închidem aplicația
             this.Close();
         }
         private bool IsValidKeyForBase(Key key)
@@ -367,7 +353,6 @@ namespace CalculatorPers
                 e.Handled = true;
                 return;
             }
-            // Gestionăm tastele apăsate
             switch (e.Key)
             {
                 case Key.Enter:
@@ -507,7 +492,6 @@ namespace CalculatorPers
                     UpdateDisplay();
                     e.Handled = true;
                     break;
-                // Pentru Backspace (deși am deja o tratare mai sus)
                 case Key.Delete:
                     _calculatorModel.ClearEntry();
                     UpdateDisplay();

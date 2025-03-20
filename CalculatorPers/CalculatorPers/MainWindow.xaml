@@ -146,8 +146,6 @@
             <Button Content="x²" Grid.Row="0" Grid.Column="1" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
             <Button Content="1/x" Grid.Row="0" Grid.Column="2" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
             <Button Content="%" Grid.Row="0" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="SpecialOperator_Click"/>
-
-            <!-- Continua cu restul butoanelor pentru modul Programmer -->
         </Grid>
         <Grid x:Name="ProgrammerGrid" Grid.Row="2" Margin="10" Visibility="Collapsed">
             <Grid.RowDefinitions>
@@ -179,8 +177,6 @@
                     <Button Content="E" Width="40" Height="35" Margin="2" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
                     <Button Content="F" Width="40" Height="35" Margin="2" Style="{StaticResource CalculatorButtonStyle}" Click="HexDigit_Click"/>
                 </WrapPanel>
-
-                <!-- Butoane standard pentru calculator în modul Programmer -->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -196,31 +192,26 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Rândul 1 -->
                     <Button Content="CE" Grid.Row="0" Grid.Column="0" Style="{StaticResource OperatorButtonStyle}" Click="Clear_Click"/>
                     <Button Content="C" Grid.Row="0" Grid.Column="1" Style="{StaticResource OperatorButtonStyle}" Click="Clear_Click"/>
                     <Button Content="⌫" Grid.Row="0" Grid.Column="2" Style="{StaticResource OperatorButtonStyle}" Click="Backspace_Click"/>
                     <Button Content="/" Grid.Row="0" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
 
-                    <!-- Rândul 2 -->
                     <Button Content="7" Grid.Row="1" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="8" Grid.Row="1" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="9" Grid.Row="1" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="*" Grid.Row="1" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
 
-                    <!-- Rândul 3 -->
                     <Button Content="4" Grid.Row="2" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="6" Grid.Row="2" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="-" Grid.Row="2" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
 
-                    <!-- Rândul 4 -->
                     <Button Content="1" Grid.Row="3" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="2" Grid.Row="3" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="3" Grid.Row="3" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="+" Grid.Row="3" Grid.Column="3" Style="{StaticResource OperatorButtonStyle}" Click="Operator_Click"/>
 
-                    <!-- Rândul 5 -->
                     <Button Content="+/-" Grid.Row="4" Grid.Column="0" Style="{StaticResource CalculatorButtonStyle}" Click="SpecialOperator_Click"/>
                     <Button Content="0" Grid.Row="4" Grid.Column="1" Style="{StaticResource CalculatorButtonStyle}" Click="Number_Click"/>
                     <Button Content="." Grid.Row="4" Grid.Column="2" Style="{StaticResource CalculatorButtonStyle}" Click="Decimal_Click"/>
